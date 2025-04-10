@@ -1,0 +1,95 @@
+* {
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+body, html {
+    margin: 0px;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#section1 {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(1, 9, 38);
+    align-items: center;
+}
+
+#title {
+    flex: 3;
+    margin-left: 150px;
+    font-weight: bold;
+}
+
+#navegation {
+    display: flex;
+    flex-direction: row;
+    margin-left: 150px;
+    flex: 1;
+    justify-content: space-evenly;
+}
+
+#section2 {
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(198, 133, 20);
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#section2 p {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+#section3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    flex: 1;
+    background-color: rgb(1, 9, 38);
+
+
+}
+
+#subscribe {
+    padding: 10px;
+    margin: 5px;
+}
+
+#section4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    color: black;
+}
+
+#section4 p {
+    color: black;
+}
+
+img {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#section5 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(1, 9, 38);
+}
