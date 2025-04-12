@@ -4,55 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workflow</title>
+    <link href="blog_css.css" rel="stylesheet">
 </head>
 <body>
-    <a href="blog.html">Regresar</a>
-    <h1>Flujo de trabajo de Git y Github</h1>
-    <ol>
-        <li>Configuración inicial</li>
-        <p>
-            Se guarda la información del usuario y la identidad para que cada commit realizado
-            quede registrado con nuestro username. Usa el comando <strong><i>git init</i></strong> para crear un repositorio 
-            en donde guardar la carpeta oculta <b>.git</b>
-        </p>
-        <li>Trabajo con repositorios remotos</li>
-        <p>
-            Se permite la conexión entre nuestro repositorio local y uno remoto en Github.<br>
-            Al clonar un repositorio, se descarga una copia completa del proyecto junto con el historial.
-            Esto nos permite sincronizar cambios y trabajar de forma remota en nuestra propia versión.<br>
-            Los comandos usados son <strong><i>git clone</i></strong>.
-        </p>
-        <li>Flujo básico de trabajo</li>
-        <p>
-            Es el ciclo principal y fundamental de trabajo en Gi y Github. Con <strong></strong><i>git status</i>
-            podemos ver el estado actual del repositorio, indicando que archivos han sido
-            modificados o se encuentran en el <strong>staging area</strong>. Con <strong><i>git add</i></strong>
-            seleccionamos los archivos que deseamos incluir al <strong>staging area</strong>.
-            Con <strong><i>git commit</i></strong> se guardan los cambios en el historial del repositorio con
-            un mensaje descriptivo
-        </p>
-        <li>Trabajo con branches</li>
-        <p>
-            Las branches sirven para trabajar en distintas tareas sin afectar el código principal.
-            Con <strong><i>git branch</i></strong> se puede ver las ramas existentes en el repositorio y permite 
-            crear nuevas. <strong><i>git checkout</i></strong> y <strong><i> git switch</i></strong> también sirven para cambiar
-            entre ramas.
-        </p>
-        <li>Sincronización con el repositorio remoto</li>
-        <p>
-            Con <strong><i>git fetch</i></strong> se descargan los cambios del repositorio remoto antes de 
-            aplicarlos al trabajo actual, para ver que cambios se han hecho. <strong><i>git pull</i></strong>
-            obtiene y aplica los cambios remotos a nuestra rama actual. Para realizar la 
-            acción inversa (mandar al repositorio remoto) se usa <strong><i>git push</i></strong>, para enviar
-            nuestros commits locales al repositorio remoto.
-        </p>
-        <li>Integración de cambios</li>
-        <p>
-            Este proceso se basa en combinar los cambios de diferentes ramas a la principal.
-            <strong><i>git merge</i></strong> incorpora los cambios de otra rama a la actual. Lo que puede 
-            causar conflictos si se modificaron las mismas líneas de código en ambas ramas,
-            asunto que se debe resolver de forma manual. 
-        </p>
-    </ol>
+<div id="container2">
+    <div id="section1_2">
+        <a href="blog.html">Regresar</a>
+        <h1>Flujo de trabajo de Git y Github</h1>
+    </div>
+    <div id="section2_2">
+        <ul>
+            <li>
+            <strong>Configuración inicial</strong>
+            <p>
+                Se guarda la información del usuario y la identidad para que cada commit realizado
+                quede registrado con nuestro username. Usa el comando <strong><i>git init</i></strong> para crear un repositorio 
+                en donde guardar la carpeta oculta <b>.git</b>
+            </p>
+            </li>
+    </div>
+    <div id="section3_2">
+        <li>
+        <strong>Trabajo con repositorios remotos</strong>
+            <p>
+                Se permite la conexión entre nuestro repositorio local y uno remoto en Github.<br>
+                Al clonar un repositorio, se descarga una copia completa del proyecto junto con el historial.
+                Esto nos permite sincronizar cambios y trabajar de forma remota en nuestra propia versión.<br>
+                Los comandos usados son <strong><i>git clone</i></strong>.
+            </p>
+        </li>
+    </div>
+    <div id="section4_2">
+        <li>
+        <strong>Flujo básico de trabajo</strong>
+            <p>
+                Es el ciclo principal y fundamental de trabajo en Gi y Github. Con <strong></strong><i>git status</i>
+                podemos ver el estado actual del repositorio, indicando que archivos han sido
+                modificados o se encuentran en el <strong>staging area</strong>. Con <strong><i>git add</i></strong>
+                seleccionamos los archivos que deseamos incluir al <strong>staging area</strong>.
+                Con <strong><i>git commit</i></strong> se guardan los cambios en el historial del repositorio con
+                un mensaje descriptivo
+            </p>
+        </li>
+    </div>
+    <div id="section5_2">
+        <li>
+            <strong>Trabajo con branches</strong>
+            <p>
+                Las branches sirven para trabajar en distintas tareas sin afectar el código principal.
+                Con <strong><i>git branch</i></strong> se puede ver las ramas existentes en el repositorio y permite 
+                crear nuevas. <strong><i>git checkout</i></strong> y <strong><i> git switch</i></strong> también sirven para cambiar
+                entre ramas.
+            </p>
+        </li>
+    </div>
+    <div id="section6_2">
+        <li>
+            <strong>Sincronización con el repositorio remoto</strong>
+            <p>
+                Con <strong><i>git fetch</i></strong> se descargan los cambios del repositorio remoto antes de 
+                aplicarlos al trabajo actual, para ver que cambios se han hecho. <strong><i>git pull</i></strong>
+                obtiene y aplica los cambios remotos a nuestra rama actual. Para realizar la 
+                acción inversa (mandar al repositorio remoto) se usa <strong><i>git push</i></strong>, para enviar
+                nuestros commits locales al repositorio remoto.
+            </p>
+        </li>
+    </div>
+    <div id="section7_2">
+        <li>
+            <strong>Integración de cambios</strong>
+            <p>
+                Este proceso se basa en combinar los cambios de diferentes ramas a la principal.
+                <strong><i>git merge</i></strong> incorpora los cambios de otra rama a la actual. Lo que puede 
+                causar conflictos si se modificaron las mismas líneas de código en ambas ramas,
+                asunto que se debe resolver de forma manual. 
+            </p>
+        </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

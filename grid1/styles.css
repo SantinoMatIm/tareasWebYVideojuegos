@@ -1,0 +1,46 @@
+body {
+    background-color: black;
+
+    height: 100vh;
+
+    margin: 0;
+}
+
+div {
+    padding: 10px;
+}
+
+#gridContainer {
+    display: grid;
+
+    height: 100%;
+
+    grid-template-rows: 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr;
+
+    grid-gap: 20px;
+}
+
+#gridItem1 {
+    background-color: red;
+}
+
+#gridItem2 {
+    background-color: orangered;
+}
+
+#gridItem3 {
+    background-color: orange;
+}
+
+#gridItem4 {
+    background-color: green;
+}
+
+#gridItem5 {
+    background-color: aqua;
+}
+
+#gridItem6 {
+    background-color: aquamarine;
+}

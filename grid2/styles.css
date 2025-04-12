@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+
+    height: 100vh;
+
+    margin: 0;
+}
+
+div {
+    padding: 10px;
+}
+
+#gridContainer {
+    display: grid;
+
+    height: 100%;
+
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr;
+
+    grid-gap: 20px;
+}
+
+#gridItem1 {
+    background-color: orange;
+
+    grid-column: 1/4;
+}
+
+#gridItem2 {
+    background-color: green;
+
+    grid-row: 2/4;
+}
+
+#gridItem3 {
+    background-color: aqua;
+
+    grid-column: 2/4;
+    grid-row: 2/3;
+}
+
+#gridItem4 {
+    background-color: red;
+}
+
+#gridItem5 {
+    background-color: orange;
+}
+
