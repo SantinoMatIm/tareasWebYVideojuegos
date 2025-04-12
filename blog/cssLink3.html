@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos CSS</title>
+    <link href="blog_css.css" rel="stylesheet">
+</head>
+<body>
+<div id="container4">
+    <div id="section1_2">
+        <a href="blog.html">Regresar</a>
+        <h1>Fundamentos de CSS</h1>
+    </div>
+    <div id="section2_3">
+        <h2>¿Qué es CSS?</h2>
+        <p>CSS (Cascading Style Sheets) o Hojas de Estilo en Cascada es un lenguaje que se utiliza para describir la presentación de documentos HTML. CSS define cómo se deben mostrar los elementos HTML en términos de layout, colores, fuentes y otros aspectos visuales.
+            CSS permite separar el contenido (HTML) de su presentación, lo que facilita el mantenimiento y mejora la accesibilidad de nuestros sitios web.</p>
+    </div>
+    <div id="section3_3">
+        <h2>Componentes principales de CSS</h2>
+        <h3>Selectores</h3>
+        <p>Los selectores son patrones que se utilizan para seleccionar los elementos HTML que queremos estilizar. Identifican a qué elementos se aplicarán las reglas de estilo.</p>
+        
+        <h3>Propiedades</h3>
+        <p>Las propiedades son características específicas de un elemento que podemos modificar, como <code>color</code>, <code>font-size</code>, <code>margin</code>, <code>padding</code>, etc.</p>
+        
+        <h3>Valores</h3>
+        <p>Los valores son las configuraciones específicas que asignamos a cada propiedad. Por ejemplo, para la propiedad <code>color</code>, un valor podría ser <code>red</code>, <code>#FF0000</code> o <code>rgb(255,0,0)</code>.</p>
+    </div>
+    <div id="section4_3">
+        <h2>Tipos de Selectores</h2>
+        <table>
+            <tr>
+                <th>Tipo</th>
+                <th>Sintaxis</th>
+                <th>Ejemplo</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>Selector de tipo</td>
+                <td><code>elemento { }</code></td>
+                <td><code>p { color: blue; }</code></td>
+                <td>Selecciona todos los elementos del tipo especificado. En el ejemplo, selecciona todos los párrafos.</td>
+            </tr>
+            <tr>
+                <td>Selector de clase</td>
+                <td><code>.clase { }</code></td>
+                <td><code>.destacado { font-weight: bold; }</code></td>
+                <td>Selecciona elementos con un atributo de clase específico. Se pueden aplicar a múltiples elementos.</td>
+            </tr>
+            <tr>
+                <td>Selector de ID</td>
+                <td><code>#id { }</code></td>
+                <td><code>#header { background-color: black; }</code></td>
+                <td>Selecciona un elemento con un ID específico. Cada ID debe ser único en el documento.</td>
+            </tr>
+        </table>
+    </div>
+    <div id="section5_3">
+        
+        <h3>Diferencias principales</h3>
+        <ul>
+            <li><strong>Selector de tipo:</strong> Afecta a todos los elementos de ese tipo en la página. Es el menos específico.</li>
+            <li><strong>Selector de clase:</strong> Permite reutilizar estilos en múltiples elementos. Tiene una especificidad media.</li>
+            <li><strong>Selector de ID:</strong> Debe ser único en la página. Tiene la mayor especificidad, lo que significa que sus estilos prevalecen sobre los otros tipos.</li>
+        </ul>
+        
+        <p>La <strong>especificidad</strong> es importante en CSS ya que determina qué reglas tienen prioridad cuando varias reglas apuntan al mismo elemento. La jerarquía de especificidad (de mayor a menor) es: Estilos en línea > ID > Clase > Tipo.</p>
+    </div>
+</div>  
+</body>
+</html>
