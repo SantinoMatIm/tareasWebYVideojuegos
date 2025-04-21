@@ -22,29 +22,29 @@ div {
 }
 
 #gridItem1 {
-    background-color: orange;
+    background-color: #fda061;
 
     grid-column: 1/4;
 }
 
 #gridItem2 {
-    background-color: green;
+    background-color: #01a787;
 
     grid-row: 2/4;
 }
 
 #gridItem3 {
-    background-color: aqua;
+    background-color: #34daba;
 
     grid-column: 2/4;
     grid-row: 2/3;
 }
 
 #gridItem4 {
-    background-color: red;
+    background-color: #fc6057;
 }
 
 #gridItem5 {
-    background-color: orange;
+    background-color: #fda061;
 }
 
