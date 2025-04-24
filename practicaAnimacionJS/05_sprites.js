@@ -1,7 +1,7 @@
 /*
  * Simple animation on the HTML canvas
  *
- * Gilberto Echeverria
+ * Santino Im
  * 2025-04-21
  */
 
