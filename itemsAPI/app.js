@@ -22,7 +22,7 @@ const itemExists = (newItem) => {
 }
 
 //Endpoint to create one or more items
-app.post('createitem/', (req, res)=>{
+app.post('/createitem', (req, res)=>{
         let newItems = req.body;
         //Convert to an array if only an object is sent
         if (!Array.isArray(newItems)) {
