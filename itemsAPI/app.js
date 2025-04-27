@@ -13,3 +13,25 @@ app.use(express.static('./public'));
 app.listen(port, ()=>{
     console.log(`App listening on port: ${port}`)
 })
+
+import items from './public/js/items.js';
+
+//Function to check if the item exists
+const idExists = (id) => {
+    return items.find(item => item.id === parseInt(id));
+}
+
+app.get('/items/:id', (req, res)=>{
+    let item = idExists(req.params.id);
+    if(item) {
+        res.status(200).json({
+            message: `The object with the id ${req.params.id} is: `,
+            item
+        })
+    }
+    else {
+        res.status(404).json({
+            message: `The object with the id ${req.params.id} doesnt exist`
+        })
+    }
+})
