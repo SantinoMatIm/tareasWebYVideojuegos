@@ -9,3 +9,5 @@ function getItems() {
     .then(data => console.log('Items retrieved: ', data))
     .catch(error => console.error('Error while getting items: ', error));
 }
+
+getItems();
