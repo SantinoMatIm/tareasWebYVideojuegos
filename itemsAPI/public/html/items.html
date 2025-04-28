@@ -5,9 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/items.js"></script>
     <script src="../js/tests.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
     <title>Items API</title>
 </head>
 <body>
-    <h1>Items API Webpage</h1>
+    <h1>Videogame API Documentation</h1>
+    
+    <p>Welcome to the Videogame API documentation. This API allows you to manage items and users for a videogame.</p>
+    
+    <h2>Endpoints</h2>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Items Endpoints -->
+            <tr>
+                <td>GET</td>
+                <td>/items</td>
+                <td>Get all items from the catalog</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/items/:id</td>
+                <td>Get a specific item by ID</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/items</td>
+                <td>Create one or more new items</td>
+            </tr>
+            <tr>
+                <td>PATCH</td>
+                <td>/items/:id</td>
+                <td>Update a specific item by ID</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/items/:id</td>
+                <td>Delete a specific item by ID</td>
+            </tr>
+            
+            <!-- Users Endpoints -->
+            <tr>
+                <td>GET</td>
+                <td>/users</td>
+                <td>Get all users</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/users/:id</td>
+                <td>Get a specific user by ID</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/users</td>
+                <td>Create one or more new users</td>
+            </tr>
+            <tr>
+                <td>PATCH</td>
+                <td>/users/:id</td>
+                <td>Update a specific user by ID</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/users/:id</td>
+                <td>Delete a specific user by ID</td>
+            </tr>
+            
+            <!-- Root Endpoint -->
+            <tr>
+                <td>GET</td>
+                <td>/</td>
+                <td>Get this API documentation page</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h2>Usage Examples</h2>
+    
+    <h3>Getting all items</h3>
+    <pre>GET /items</pre>
+    
+    <h3>Creating a new item</h3>
+    <pre>POST /items
+Content-Type: application/json
+
+{
+  "id": 8,
+  "name": "dragon scale",
+  "type": "material",
+  "effect": "+15 fire resistance"
+}</pre>
+    
+    <h3>Updating an item</h3>
+    <pre>PATCH /items/8
+Content-Type: application/json
+
+{
+  "effect": "+20 fire resistance"
+}</pre>
+    
+    <h3>Deleting an item</h3>
+    <pre>DELETE /items/8</pre>
+
+    <footer>
+        <p>© 2025 Videogame API - Developer Practice Project</p>
+    </footer>
 </body>
 </html>
