@@ -15,14 +15,3 @@ app.listen(port, ()=>{
     console.log(`App listening on port: ${port}`)
 })
 
-app.get('/', (req, res)=>{
-    fs.readFile('./public/html/items.html', 'utf8', (err, html) =>{
-        if(err) {
-            res.status(500).send('There was an error: ' + err)
-            return
-        }
-        console.log('Sending page...');
-        res.send(html);
-        console.log('Page sent!');
-    })
-})
