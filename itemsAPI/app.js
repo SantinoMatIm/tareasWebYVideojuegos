@@ -10,22 +10,6 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
-app.listen(port, ()=>{
-    console.log(`App listening on port: ${port}`)
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
 let items = [];
 
 //Function to verify if the item already exists
@@ -77,4 +61,8 @@ app.post('/items', (req, res)=>{
         items: added
     })
 
+})
+
+app.listen(port, ()=>{
+    console.log(`App listening on port: ${port}`)
 })
