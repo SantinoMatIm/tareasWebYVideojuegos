@@ -21,6 +21,7 @@ app.get('/items/:id', (req, res)=>{
     const item = idExists(req.params.id);
     if (item) {
         res.status(200).json({
+            message: `The item with the id ${req.params.id} has been deleted: `,
             item
         })
     }
