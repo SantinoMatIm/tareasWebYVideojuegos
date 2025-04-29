@@ -10,10 +10,6 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
-app.listen(port, ()=>{
-    console.log(`App listening on port: ${port}`)
-})
-
 import items from './public/js/items.js';
 
 //Function to verify if there are no items
@@ -34,4 +30,8 @@ app.get('/items', (req, res)=>{
             message: 'There are no items on the catalog'
         })
     }
+})
+
+app.listen(port, ()=>{
+    console.log(`App listening on port: ${port}`)
 })
