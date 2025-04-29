@@ -10,10 +10,6 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
-app.listen(port, ()=>{
-    console.log(`App listening on port: ${port}`)
-})
-
 import items from './public/js/items.js';
 
 //Function to check if the item exists
@@ -34,4 +30,8 @@ app.get('/items/:id', (req, res)=>{
             message: `The object with the id ${req.params.id} doesnt exist`
         })
     }
+})
+
+app.listen(port, ()=>{
+    console.log(`App listening on port: ${port}`)
 })
