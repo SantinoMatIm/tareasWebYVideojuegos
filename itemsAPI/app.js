@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static('./public'));
 
 app.get('/', (req, res) =>{
-    fs.readFile('./public/html/helloServer.html', 'utf8',
+    fs.readFile('./public/html/items.html', 'utf8',
         (err, html) => {
             if(err){
                 res.status(500).send('There was an error: '
