@@ -25,6 +25,38 @@ app.get('/', (req, res) =>{
         })
 })
 
+import items from './public/js/items.js';
+import users from './public/js/users.js';
+
+//Function to verify if there are no users 
+
+function userExists(array) {
+    return array.length > 0;
+}
+
+app.get('/users', (req, res)=>{
+    if(userExists(users)) {    
+        // Create copy of the users array
+        const fullUsers = JSON.parse(JSON.stringify(users)); 
+        
+        fullUsers.forEach(user => {
+            user.items = user.items.map(itemID =>{
+                const fullItem = items.find(item => item.id === itemID);
+                return fullItem;
+            })
+        });
+        res.status(200).json ({
+            message: 'These are the users registered: ',
+            fullUsers
+        })
+    }
+    else {
+        res.status(404).json({
+            message: 'There are no users registeres'
+        })
+    }
+})
+
 app.listen(port, ()=>{
     console.log(`App listening on port: ${port}`)
 })
