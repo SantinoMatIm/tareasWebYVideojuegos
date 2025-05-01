@@ -25,6 +25,39 @@ app.get('/', (req, res) =>{
         })
 })
 
+import users from './public/js/users.js';
+
+app.patch('/users/:id', (req, res)=>{
+    const userId = parseInt(req.params.id);
+    const updates = req.body; //Replaced fields
+    // Search for the item index
+    const userIndex = users.findIndex(user => user.id === userId);
+
+    if(userIndex === -1) {
+        res.status(404).json({
+            message: `The user with the id ${req.params.id} doesnt exist`
+        })
+    }
+
+    // Update the required fields 
+    const updatedUser = {...users[userIndex]}
+
+    //Iterate the required fields and properties and patch them
+    for (const key in updates) {
+        if (key !== 'id') {
+            updatedUser[key] = updates[key];
+        }
+    }
+
+    //Replace the original item with the patched one
+    users[userIndex] = updatedUser;
+
+    res.status(200).json({
+        message: `The user with the id ${req.params.id} has been updated`,
+        user: updatedUser
+    })
+})
+
 app.listen(port, ()=>{
     console.log(`App listening on port: ${port}`)
 })
