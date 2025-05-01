@@ -1,7 +1,6 @@
 "use strict"
 
 import express from "express";
-import users from './public/js/users.js';
 import fs from 'fs';
 import items from './public/js/items.js';
 import users from './public/js/users.js';
@@ -31,7 +30,7 @@ const itemIdExists = (id) => {
     return items.some(item => item.id === parseInt(id));
 };
 
-// Función para verificar si un array tiene elementos
+// Función para verificar si un array de items tiene elementos
 const hasItems = (array) => {
     return array.length > 0;
 };
@@ -42,14 +41,14 @@ const userExists = (newUser) => {
 };
 
 // Función para verificar que el array de usuarios no esté vacío
-function userExists(array) {
+const hasUsers = (array) => {
     return array.length > 0;
-}
+};
 
-// Función para verificar que un id existe en el array de usuarios
-const idExists = (id) => {
+// Función para encontrar un usuario por ID
+const findUserById = (id) => {
     return users.find(user => user.id === parseInt(id));
-}
+};
 
 // ===== RUTA A LA PAGINA =====
 
@@ -166,7 +165,7 @@ app.delete('/items/:id', (req, res) => {
 });
 
 // PATCH: Actualizar item por ID
-app.patch('/items/:id', (req, res) => { // Corregido: añadida la barra inicial
+app.patch('/items/:id', (req, res) => {
     const itemId = parseInt(req.params.id);
     const updates = req.body; // Campos a reemplazar
     // Buscar el índice del item
@@ -233,7 +232,7 @@ app.post('/users', (req, res) => {
         }
 
         for (const itemID of user.items) {
-            if (!itemIdExists(itemID)) {  // Cambiado a la función correcta
+            if (!itemIdExists(itemID)) {
                 invalidItems.push(itemID);
             }
         }
@@ -263,33 +262,35 @@ app.post('/users', (req, res) => {
 });
 
 // GET: Obtener todos los usuarios
-app.get('/users', (req, res)=>{
-    if(userExists(users)) {    
+app.get('/users', (req, res) => {
+    if(hasUsers(users)) {    
         // Create copy of the users array
         const fullUsers = JSON.parse(JSON.stringify(users)); 
         
         fullUsers.forEach(user => {
-            user.items = user.items.map(itemID =>{
+            user.items = user.items.map(itemID => {
                 const fullItem = items.find(item => item.id === itemID);
-                return fullItem;
-            })
+                return fullItem || { id: itemID, error: "Item not found" };
+            });
         });
-        res.status(200).json ({
+        
+        res.status(200).json({
             message: 'These are the users registered: ',
-            fullUsers
-        })
+            users: fullUsers
+        });
     }
     else {
         res.status(404).json({
-            message: 'There are no users registeres'
-        })
+            message: 'There are no users registered'
+        });
     }
-})
+});
 
 // GET: Obtener un usuario por su ID
-app.get('/users/:id', (req, res)=>{
+app.get('/users/:id', (req, res) => {
     const userId = parseInt(req.params.id);
-    const user = users.find(user => user.id === userId);
+    const user = findUserById(userId);
+    
     if (!user) {
         return res.status(404).json({
             message: `User with id ${userId} not found`
@@ -302,7 +303,7 @@ app.get('/users/:id', (req, res)=>{
     fullUser.items = fullUser.items.map(itemId => {
         const fullItem = items.find(item => item.id === itemId);
         // Manejar el caso de que el item no exista
-        return fullItem
+        return fullItem || { id: itemId, error: "Item not found" };
     });
     
     res.status(200).json({
@@ -312,28 +313,57 @@ app.get('/users/:id', (req, res)=>{
 });
 
 // DELETE: Borrar un usuario de la lista de usuarios
-app.delete('/users/:id', (req, res)=>{
+app.delete('/users/:id', (req, res) => {
     const userId = parseInt(req.params.id);
-    const user = idExists(req.params.id);
-    if (user) {
-        const userIndex = users.findIndex(user => user.id === userId);
-        if (userIndex !== -1) {
+    const userIndex = users.findIndex(user => user.id === userId);
+    
+    if (userIndex !== -1) {
+        const deletedUser = users[userIndex];
         users.splice(userIndex, 1);
-        }
         res.status(200).json({
             message: `The user with the id ${req.params.id} was deleted, this is the new catalog`,
             users
-        })
-    }
-    else {
+        });
+    } else {
         res.status(404).json({
-            message: `The user with the id ${req.params.id} doesnt exist`
-        })
+            message: `The user with the id ${req.params.id} doesn't exist`
+        });
     }
-})
+});
+
+// PATCH: Actualizar un usuario por ID
+app.patch('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const updates = req.body; // Campos a reemplazar
+    // Buscar el índice del usuario
+    const userIndex = users.findIndex(user => user.id === userId);
+
+    if (userIndex === -1) {
+        return res.status(404).json({
+            message: `The user with the id ${req.params.id} doesn't exist`
+        });
+    }
+
+    // Actualizar los campos requeridos 
+    const updatedUser = {...users[userIndex]};
+
+    // Iterar sobre los campos y propiedades requeridos y actualizarlos
+    for (const key in updates) {
+        if (key !== 'id') {
+            updatedUser[key] = updates[key];
+        }
+    }
+
+    // Reemplazar el usuario original con el actualizado
+    users[userIndex] = updatedUser;
+
+    res.status(200).json({
+        message: `The user with the id ${req.params.id} has been updated`,
+        user: updatedUser
+    });
+});
 
 // Iniciar servidor
 app.listen(port, () => {
     console.log(`App listening on port: ${port}`);
 });
-
