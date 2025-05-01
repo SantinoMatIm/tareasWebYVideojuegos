@@ -2,6 +2,7 @@
 
 import express from "express";
 import fs from 'fs';
+import items from './public/js/items.js';
 
 const port = 3000;
 
@@ -11,7 +12,7 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
     fs.readFile('./public/html/items.html', 'utf8',
         (err, html) => {
             if(err){
@@ -23,80 +24,97 @@ app.get('/', (req, res) =>{
             res.send(html);
             console.log("Page sent!")
         })
-})
+});
 
-import items from './public/js/items.js';
+// Function to verify if an item with the same id or name already exists
+const itemExistsByIdOrName = (newItem) => {
+    return items.some(item => item.id === newItem.id || item.name === newItem.name);
+};
 
-//Function to verify if the item already exists
-const itemExists = (newItem) => {
-    return items.some(item => item.id === newItem.id || item.name === newItem.name)
-}
+// Function to check if items array has elements
+const hasItems = (array) => {
+    return array.length > 0;
+};
 
-//Endpoint to create one or more items
-app.post('/items', (req, res)=>{
-        let newItems = req.body;
-        //Convert to an array if only an object is sent
-        if (!Array.isArray(newItems)) {
-            newItems = [newItems];
+// Function to find an item by ID
+const findItemById = (id) => {
+    return items.find(item => item.id === parseInt(id));
+};
+
+// POST: Create one or more items
+app.post('/items', (req, res) => {
+    let newItems = req.body;
+    // Convert to an array if only an object is sent
+    if (!Array.isArray(newItems)) {
+        newItems = [newItems];
+    }
+
+    let added = [];
+    let errors = [];
+
+    newItems.forEach(item => {
+        if (!item.id || !item.name || !item.type || !item.effect) {
+            errors.push({
+                item,
+                message: 'There are missing attributes for the item (id, name, type, effect)'
+            });
         }
+        else if (itemExistsByIdOrName(item)) {
+            errors.push({
+                item,
+                message: 'The item is already on the server'
+            });
+        }
+        else {
+            items.push(item);
+            added.push(item);
+        }
+    });
 
-        let added = [];
-        let errors = [];
-
-        newItems.forEach(item => {
-            if (!item.id || !item.name || !item.type || !item.effect) {
-                errors.push({
-                    item,
-                    message: 'There are missing attributes for the item (id, name, type, effect)'
-                })
-            }
-            else if (itemExists(item)) {
-                errors.push({
-                    item,
-                    message: 'The item is already on the server'
-                })
-            }
-            else {
-                items.push(item);
-                added.push(item);
-            }
-        });
-})
-
-    //Response status
-
+    // Response status
     if (errors.length > 0) {
         return res.status(409).json({
             message: 'These items could not be created',
             errors
-        })
+        });
     }
     res.status(201).json({
-        messsage: 'These items were succesfully created',
+        message: 'These items were successfully created',
         items: added
-    })
+    });
+});
 
-//Function to verify if there are no items
-
-function itemExists(array) {
-    return array.length > 0;
-}
-
-app.get('/items', (req, res)=>{
-    if(itemExists(items)) {
-        res.status(200).json ({
+// GET: Get all items
+app.get('/items', (req, res) => {
+    if(hasItems(items)) {
+        res.status(200).json({
             message: 'These are the items on the catalog: ',
             items
-        })
+        });
     }
     else {
         res.status(404).json({
             message: 'There are no items on the catalog'
-        })
+        });
     }
-})
+});
 
-app.listen(port, ()=>{
-    console.log(`App listening on port: ${port}`)
-})
+// GET: Get item by ID
+app.get('/items/:id', (req, res) => {
+    let item = findItemById(req.params.id);
+    if(item) {
+        res.status(200).json({
+            message: `The object with the id ${req.params.id} is: `,
+            item
+        });
+    }
+    else {
+        res.status(404).json({
+            message: `The object with the id ${req.params.id} doesn't exist`
+        });
+    }
+});
 
+app.listen(port, () => {
+    console.log(`App listening on port: ${port}`);
+});
