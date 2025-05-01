@@ -61,7 +61,7 @@ app.post('/items', (req, res)=>{
                 added.push(item);
             }
         });
-
+})
 
     //Response status
 
@@ -75,6 +75,25 @@ app.post('/items', (req, res)=>{
         messsage: 'These items were succesfully created',
         items: added
     })
+
+//Function to verify if there are no items
+
+function itemExists(array) {
+    return array.length > 0;
+}
+
+app.get('/items', (req, res)=>{
+    if(itemExists(items)) {
+        res.status(200).json ({
+            message: 'These are the items on the catalog: ',
+            items
+        })
+    }
+    else {
+        res.status(404).json({
+            message: 'There are no items on the catalog'
+        })
+    }
 })
 
 app.listen(port, ()=>{
