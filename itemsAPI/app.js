@@ -1,6 +1,7 @@
 "use strict"
 
 import express from "express";
+import users from './public/js/users.js';
 import fs from 'fs';
 
 const port = 3000;
@@ -23,6 +24,28 @@ app.get('/', (req, res) =>{
             res.send(html);
             console.log("Page sent!")
         })
+})
+
+//Function to check if the user exists
+const idExists = (id) => {
+    return users.find(user => user.id === parseInt(id));
+}
+
+app.delete('/users/:id', (req, res)=>{
+    const userId = parseInt(req.params.id);
+    const user = idExists(req.params.id);
+    if (user) {
+        users = users.filter(user => user.id !== userId)
+        res.status(200).json({
+            message: `The user with the id ${req.params.id} was deleted, this is the new catalog`,
+            users
+        })
+    }
+    else {
+        res.status(404).json({
+            message: `The user with the id ${req.params.id} doesnt exist`
+        })
+    }
 })
 
 app.listen(port, ()=>{
