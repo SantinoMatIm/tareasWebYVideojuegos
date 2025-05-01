@@ -35,7 +35,10 @@ app.delete('/users/:id', (req, res)=>{
     const userId = parseInt(req.params.id);
     const user = idExists(req.params.id);
     if (user) {
-        users = users.filter(user => user.id !== userId)
+        const userIndex = users.findIndex(user => user.id === userId);
+        if (userIndex !== -1) {
+        users.splice(userIndex, 1);
+        }
         res.status(200).json({
             message: `The user with the id ${req.params.id} was deleted, this is the new catalog`,
             users
