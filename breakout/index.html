@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>B R E A K O U T</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="game_object_class.js"></script>
+        <script src="text_label_class.js"></script>
+        <script src="vec_class.js"></script>
+        <script src="breakout.js"></script>
+    </head>
+
+    <body>
+        <div id="headerContainer">
+            <h1>B R E A K O U T</h1>
+        </div>
+        
+        <canvas id="canvas"></canvas>
+        
+        <div id="instructions">
+            <h2>Instrucciones:</h2>
+            <p>Usa las teclas de flecha izquierda y derecha (o el mouse) para mover la paleta.</p>
+            <p>Presiona la barra espaciadora para lanzar la pelota.</p>
+            <p>Destruye todos los bloques para ganar. Cada bloque destruido aumentará tu contador de bloques.</p>
+            <p>La pelota rebota en los bordes izquierdo, superior y derecho de la pantalla. Si la pelota pasa por el borde inferior, perderás una vida.</p>
+            <p>Tienes 3 vidas, y al terminarlas aparecerá el letrero de GAME OVER.</p>
+            <p>Si pierdes todas tus vidas o ganas el juego, puedes reiniciar presionando la barra espaciadora.</p>
+            <p><strong>Nota:</strong> El número de bloques de colores puede ser configurado modificando las propiedades <code>rows</code> y <code>columns</code> en la clase <code>Game</code>.</p>
+        </div>
+        
+        <a href="/">
+            <button id="backButton">Back</button>
+        </a>
+        
+        <script>main();</script>
+    </body>
+</html>
