@@ -1,6 +1,7 @@
 "use strict"
 
 import express from "express";
+import users from './public/js/users.js';
 import fs from 'fs';
 import items from './public/js/items.js';
 import users from './public/js/users.js';
@@ -309,6 +310,27 @@ app.get('/users/:id', (req, res)=>{
         user: fullUser
     });
 });
+
+// DELETE: Borrar un usuario de la lista de usuarios
+app.delete('/users/:id', (req, res)=>{
+    const userId = parseInt(req.params.id);
+    const user = idExists(req.params.id);
+    if (user) {
+        const userIndex = users.findIndex(user => user.id === userId);
+        if (userIndex !== -1) {
+        users.splice(userIndex, 1);
+        }
+        res.status(200).json({
+            message: `The user with the id ${req.params.id} was deleted, this is the new catalog`,
+            users
+        })
+    }
+    else {
+        res.status(404).json({
+            message: `The user with the id ${req.params.id} doesnt exist`
+        })
+    }
+})
 
 // Iniciar servidor
 app.listen(port, () => {
