@@ -35,7 +35,10 @@ app.delete('/items/:id', (req, res)=>{
     const itemId = parseInt(req.params.id);
     const item = idExists(req.params.id);
     if (item) {
-        items = items.filter(item => item.id !== itemId)
+        const itemIndex = items.findIndex(item => item.id === itemId);
+        if (itemIndex !== -1) {
+        items.splice(itemIndex, 1);
+        }
         res.status(200).json({
             message: `The object with the id ${req.params.id} was deleted, this is the new catalog`,
             items
