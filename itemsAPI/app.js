@@ -25,7 +25,7 @@ app.get('/', (req, res) =>{
         })
 })
 
-let items = [];
+import items from './public/js/items.js';
 
 //Function to verify if the item already exists
 const itemExists = (newItem) => {
