@@ -1,6 +1,7 @@
 "use strict"
 
 import express from "express";
+import items from './public/js/items.js';
 import fs from 'fs';
 import items from './public/js/items.js';
 
@@ -30,6 +31,11 @@ app.get('/', (req, res) => {
 const itemExistsByIdOrName = (newItem) => {
     return items.some(item => item.id === newItem.id || item.name === newItem.name);
 };
+
+//Function to check if the item exists (same as the one in get-item-by-id)
+const idExists = (id) => {
+    return items.find(item => item.id === parseInt(id));
+}
 
 // Function to check if items array has elements
 const hasItems = (array) => {
@@ -114,6 +120,26 @@ app.get('/items/:id', (req, res) => {
         });
     }
 });
+
+app.delete('/items/:id', (req, res)=>{
+    const itemId = parseInt(req.params.id);
+    const item = idExists(req.params.id);
+    if (item) {
+        const itemIndex = items.findIndex(item => item.id === itemId);
+        if (itemIndex !== -1) {
+        items.splice(itemIndex, 1);
+        }
+        res.status(200).json({
+            message: `The object with the id ${req.params.id} was deleted, this is the new catalog`,
+            items
+        })
+    }
+    else {
+        res.status(404).json({
+            message: `The object with the id ${req.params.id} doesnt exist`
+        })
+    }
+})
 
 app.listen(port, () => {
     console.log(`App listening on port: ${port}`);

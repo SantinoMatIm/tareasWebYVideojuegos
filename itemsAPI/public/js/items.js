@@ -40,6 +40,24 @@ let items = [
         "name": "lightning strike",
         "type": "zone",
         "effect": "+8 electric damage"
+    },
+    {
+        "id": 8,
+        "name": "dragon scale",
+        "type": "material",
+        "effect": "+15 fire resistance"
+    },
+    {
+        "id": 9,
+        "name": "health amulet",
+        "type": "accessory",
+        "effect": "+25 max health"
+    },
+    {
+        "id": 10,
+        "name": "smoke bomb",
+        "type": "consumable",
+        "effect": "escape from battle"
     }
 ];
 
