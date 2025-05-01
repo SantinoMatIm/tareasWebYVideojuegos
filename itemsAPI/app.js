@@ -3,6 +3,7 @@
 import express from "express";
 import fs from 'fs';
 import items from './public/js/items.js';
+import users from './public/js/users.js';
 
 const port = 3000;
 
@@ -11,8 +12,6 @@ const app = express();
 app.use(express.json());
 
 app.use(express.static('./public'));
-
-let users = []; // Array para almacenar usuarios
 
 // ===== FUNCIONES AUXILIARES =====
 
@@ -41,7 +40,12 @@ const userExists = (newUser) => {
     return users.some(user => user.id === newUser.id || user.name === newUser.name);
 };
 
-// ===== RUTAS =====
+// Función para verificar que el array de usuarios no esté vacío
+function userExists(array) {
+    return array.length > 0;
+}
+
+// ===== RUTA A LA PAGINA =====
 
 // Ruta principal
 app.get('/', (req, res) => {
@@ -251,6 +255,30 @@ app.post('/users', (req, res) => {
         users: added
     });
 });
+
+// GET: Obtener todos los usuarios
+app.get('/users', (req, res)=>{
+    if(userExists(users)) {    
+        // Create copy of the users array
+        const fullUsers = JSON.parse(JSON.stringify(users)); 
+        
+        fullUsers.forEach(user => {
+            user.items = user.items.map(itemID =>{
+                const fullItem = items.find(item => item.id === itemID);
+                return fullItem;
+            })
+        });
+        res.status(200).json ({
+            message: 'These are the users registered: ',
+            fullUsers
+        })
+    }
+    else {
+        res.status(404).json({
+            message: 'There are no users registeres'
+        })
+    }
+})
 
 // Iniciar servidor
 app.listen(port, () => {
