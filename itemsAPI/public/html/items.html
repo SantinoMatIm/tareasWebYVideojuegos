@@ -3,117 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/items.js"></script>
-    <script src="../js/tests.js"></script>
-    <script src="../js/users.js"></script>
-    <link rel="stylesheet" href="../css/styles.css">
     <title>Items API</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="module" src="../js/tests.js"></script>
+    <script type="module" src="../js/form-handler.js"></script>
+    <script src="../js/tab-handler.js"></script>
 </head>
 <body>
     <h1>Videogame API Documentation</h1>
     
     <p>Welcome to the Videogame API documentation. This API allows you to manage items and users for a videogame.</p>
-    
-    <h2>Endpoints</h2>
-    
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Method</th>
-                <th>Endpoint</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Items Endpoints -->
-            <tr>
-                <td>GET</td>
-                <td>/items</td>
-                <td>Get all items from the catalog</td>
-            </tr>
-            <tr>
-                <td>GET</td>
-                <td>/items/:id</td>
-                <td>Get a specific item by ID</td>
-            </tr>
-            <tr>
-                <td>POST</td>
-                <td>/items</td>
-                <td>Create one or more new items</td>
-            </tr>
-            <tr>
-                <td>PATCH</td>
-                <td>/items/:id</td>
-                <td>Update a specific item by ID</td>
-            </tr>
-            <tr>
-                <td>DELETE</td>
-                <td>/items/:id</td>
-                <td>Delete a specific item by ID</td>
-            </tr>
-            
-            <!-- Users Endpoints -->
-            <tr>
-                <td>GET</td>
-                <td>/users</td>
-                <td>Get all users</td>
-            </tr>
-            <tr>
-                <td>GET</td>
-                <td>/users/:id</td>
-                <td>Get a specific user by ID</td>
-            </tr>
-            <tr>
-                <td>POST</td>
-                <td>/users</td>
-                <td>Create one or more new users</td>
-            </tr>
-            <tr>
-                <td>PATCH</td>
-                <td>/users/:id</td>
-                <td>Update a specific user by ID</td>
-            </tr>
-            <tr>
-                <td>DELETE</td>
-                <td>/users/:id</td>
-                <td>Delete a specific user by ID</td>
-            </tr>
-            
-            <!-- Root Endpoint -->
-            <tr>
-                <td>GET</td>
-                <td>/</td>
-                <td>Get this API documentation page</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <h2>Usage Examples</h2>
-    
-    <h3>Getting all items</h3>
-    <pre>GET /items</pre>
-    
-    <h3>Creating a new item</h3>
-    <pre>POST /items
-Content-Type: application/json
 
-{
-  "id": 8,
-  "name": "dragon scale",
-  "type": "material",
-  "effect": "+15 fire resistance"
-}</pre>
-    
-    <h3>Updating an item</h3>
-    <pre>PATCH /items/8
-Content-Type: application/json
+    <div class="tab-container">
+        <div class="tab active" data-tab="items">Items</div>
+        <div class="tab" data-tab="users">Users</div>
+    </div>
 
-{
-  "effect": "+20 fire resistance"
-}</pre>
-    
-    <h3>Deleting an item</h3>
-    <pre>DELETE /items/8</pre>
+    <!-- ITEMS TAB -->
+    <div id="items-tab" class="tab-content active">
+        <h2>Items Operations</h2>
+
+        <!-- Create Item Section -->
+        <div class="api-section">
+            <h3>Create an Item</h3>
+            <form id="create-item-form">
+                <div class="form-group">
+                    <label for="item-name">Name:</label>
+                    <input type="text" id="item-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-type">Type:</label>
+                    <input type="text" id="item-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-effect">Effect:</label>
+                    <input type="text" id="item-effect" required>
+                </div>
+                <button type="submit">Create Item</button>
+            </form>
+        </div>
+
+        <!-- Get All Items Section -->
+        <div class="api-section">
+            <h3>Get All Items</h3>
+            <button id="get-items-btn">Get Items</button>
+        </div>
+
+        <!-- Get Item By ID Section -->
+        <div class="api-section">
+            <h3>Get Item by ID</h3>
+            <form id="get-item-form">
+                <div class="form-group">
+                    <label for="get-item-id">Item ID:</label>
+                    <input type="number" id="get-item-id" required>
+                </div>
+                <button type="submit">Get Item</button>
+            </form>
+        </div>
+
+        <!-- Update Item Section -->
+        <div class="api-section">
+            <h3>Update Item</h3>
+            <form id="update-item-form">
+                <div class="form-group">
+                    <label for="update-item-id">Item ID:</label>
+                    <input type="number" id="update-item-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="update-item-name">Name (leave empty to keep unchanged):</label>
+                    <input type="text" id="update-item-name">
+                </div>
+                <div class="form-group">
+                    <label for="update-item-type">Type (leave empty to keep unchanged):</label>
+                    <input type="text" id="update-item-type">
+                </div>
+                <div class="form-group">
+                    <label for="update-item-effect">Effect (leave empty to keep unchanged):</label>
+                    <input type="text" id="update-item-effect">
+                </div>
+                <button type="submit">Update Item</button>
+            </form>
+        </div>
+
+        <!-- Delete Item Section -->
+        <div class="api-section">
+            <h3>Delete Item</h3>
+            <form id="delete-item-form">
+                <div class="form-group">
+                    <label for="delete-item-id">Item ID:</label>
+                    <input type="number" id="delete-item-id" required>
+                </div>
+                <button type="submit">Delete Item</button>
+            </form>
+        </div>
+
+        <!-- Results Display -->
+        <div id="items-result" class="results-container">
+            <p>Results will appear here...</p>
+        </div>
+    </div>
+
+    <!-- USERS TAB -->
+    <div id="users-tab" class="tab-content">
+        <h2>Users Operations</h2>
+
+        <!-- Create User Section -->
+        <div class="api-section">
+            <h3>Create a User</h3>
+            <form id="create-user-form">
+                <div class="form-group">
+                <label for="user-name">Name:</label>
+                <input type="text" id="user-name" required>
+                </div>
+                <div class="form-group">
+                <label for="user-mail">Mail (username):</label>
+                <input type="text" id="user-mail" required>
+                </div>
+                <div class="form-group">
+                <label for="user-email">Email:</label>
+                <input type="email" id="user-email" required>
+                </div>
+                <button type="submit">Create User</button>
+            </form>
+            </div>
+
+        <!-- Get All Users Section -->
+        <div class="api-section">
+            <h3>Get All Users</h3>
+            <button id="get-users-btn">Get Users</button>
+        </div>
+
+        <!-- Get User By ID Section -->
+        <div class="api-section">
+            <h3>Get User by ID</h3>
+            <form id="get-user-form">
+                <div class="form-group">
+                    <label for="get-user-id">User ID:</label>
+                    <input type="number" id="get-user-id" required>
+                </div>
+                <button type="submit">Get User</button>
+            </form>
+        </div>
+
+        <!-- Update User Section -->
+        <div class="api-section">
+            <h3>Update User</h3>
+            <form id="update-user-form">
+                <div class="form-group">
+                    <label for="update-user-id">User ID:</label>
+                    <input type="number" id="update-user-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="update-user-name">Name (leave empty to keep unchanged):</label>
+                    <input type="text" id="update-user-name">
+                </div>
+                <div class="form-group">
+                    <label for="update-user-email">Email (leave empty to keep unchanged):</label>
+                    <input type="email" id="update-user-email">
+                </div>
+                <div class="form-group">
+                    <label for="update-user-role">Role (leave empty to keep unchanged):</label>
+                    <input type="text" id="update-user-role">
+                </div>
+                <button type="submit">Update User</button>
+            </form>
+        </div>
+
+        <!-- Delete User Section -->
+        <div class="api-section">
+            <h3>Delete User</h3>
+            <form id="delete-user-form">
+                <div class="form-group">
+                    <label for="delete-user-id">User ID:</label>
+                    <input type="number" id="delete-user-id" required>
+                </div>
+                <button type="submit">Delete User</button>
+            </form>
+        </div>
+
+        <!-- Results Display -->
+        <div id="users-result" class="results-container">
+            <p>Results will appear here...</p>
+        </div>
+    </div>
 
     <footer>
         <p>© 2025 Videogame API - Developer Practice Project</p>
